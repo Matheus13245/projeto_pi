@@ -145,7 +145,8 @@ Ajuste `nome_do_banco`, usuário e senha de acordo com o seu ambiente.
 
 1. Certifique-se de que o banco de dados está em execução e configurado.
 3. Abra o projeto no Spring Tools (caso não esteja aberto).
-4. Clique com o botão direito no nome do projeto -> `Maven` -> `Update Project...` e confirme (apenas na vez em que o projeto do backend é aberto no Spring Tools ou se mudar as dependencias do projeto).
+4. Clique com o botão direito no nome do projeto -> `Maven` -> `Update Project...` e confirme 
+5. (apenas na vez em que o projeto do backend é aberto no Spring Tools ou se mudar as dependencias do projeto).
 5. Selecionar o projeto do backend no painel 'Boot Dashboard', local -> selecionar o projeto  e depois clicar em 'Start ou restart'.
 6. O backend deve subir em `http://localhost:8080`.
 

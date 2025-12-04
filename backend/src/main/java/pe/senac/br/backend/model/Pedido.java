@@ -17,13 +17,16 @@ public class Pedido {
     private LocalDateTime dataPedido;
     private String status;
     private BigDecimal valorTotal;
-
-    // Muitos pedidos para um cliente
+    private Double qtdSolicitada;
+    
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    // N:N com Semente
+    @ManyToOne
+    @JoinColumn(name = "endereco_id")
+    private Endereco endereco;
+
     @ManyToMany
     @JoinTable(
             name = "pedido_semente",
@@ -32,56 +35,29 @@ public class Pedido {
     )
     private Set<Semente> sementes = new HashSet<>();
 
-    public Pedido() {
-    }
+    public Pedido() {}
 
-    // getters e setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getId() {
-        return id;
-    }
+    public LocalDateTime getDataPedido() { return dataPedido; }
+    public void setDataPedido(LocalDateTime dataPedido) { this.dataPedido = dataPedido; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
-    public LocalDateTime getDataPedido() {
-        return dataPedido;
-    }
+    public BigDecimal getValorTotal() { return valorTotal; }
+    public void setValorTotal(BigDecimal valorTotal) { this.valorTotal = valorTotal; }
+    
+    public Double getQtdSolicitada () { return qtdSolicitada; }
+    public void setQtdSolicitada (Double qtdSolicitada) {this.qtdSolicitada = qtdSolicitada;}
 
-    public void setDataPedido(LocalDateTime dataPedido) {
-        this.dataPedido = dataPedido;
-    }
+    public Cliente getCliente() { return cliente; }
+    public void setCliente(Cliente cliente) { this.cliente = cliente; }
 
-    public String getStatus() {
-        return status;
-    }
+    public Endereco getEndereco() { return endereco; }
+    public void setEndereco(Endereco endereco) { this.endereco = endereco; }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public BigDecimal getValorTotal() {
-        return valorTotal;
-    }
-
-    public void setValorTotal(BigDecimal valorTotal) {
-        this.valorTotal = valorTotal;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public Set<Semente> getSementes() {
-        return sementes;
-    }
-
-    public void setSementes(Set<Semente> sementes) {
-        this.sementes = sementes;
-    }
+    public Set<Semente> getSementes() { return sementes; }
+    public void setSementes(Set<Semente> sementes) { this.sementes = sementes; }
 }

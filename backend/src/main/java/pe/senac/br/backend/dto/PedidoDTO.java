@@ -10,8 +10,10 @@ public class PedidoDTO {
     private LocalDateTime dataPedido;
     private String status;
     private BigDecimal valorTotal;
+    private Double qtdSolicitada;
 
     private Long clienteId;
+    private Long enderecoId;
     private List<Long> sementesIds;
 
     public PedidoDTO() {
@@ -50,6 +52,14 @@ public class PedidoDTO {
     public void setValorTotal(BigDecimal valorTotal) {
         this.valorTotal = valorTotal;
     }
+    
+    public Double getQtdSolicitada () {
+    	return qtdSolicitada; 
+    }
+    
+    public void setQtdSolicitada (Double qtdSolicitada) {
+    	this.qtdSolicitada = qtdSolicitada;
+    }
 
     public Long getClienteId() {
         return clienteId;
@@ -57,6 +67,14 @@ public class PedidoDTO {
 
     public void setClienteId(Long clienteId) {
         this.clienteId = clienteId;
+    }
+    
+    public Long getEnderecoId() {
+    	return enderecoId;
+    }
+    
+    public void setEnderecoId (Long enderecoId) {
+    	this.enderecoId = enderecoId;
     }
 
     public List<Long> getSementesIds() {
