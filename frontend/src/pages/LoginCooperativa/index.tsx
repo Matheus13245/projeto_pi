@@ -25,7 +25,7 @@ export default function CopLogin() {
         // Salva info básica do usuário cop
         localStorage.setItem("copusuarioLogado", emailCorporativo);
 
-        router.push(`/coperativa/dashboard`);
+        router.push(`/MainCooperativa?user=${encodeURIComponent(emailCorporativo)}`);
       } else {
         setError(data.mensagem || "Credenciais inválidas");
       }

@@ -122,7 +122,7 @@ export default function CopCadastro() {
         <button
           type="button"
           className={styles.secondaryButton}
-          onClick={() => router.push("/cop/login")}
+          onClick={() => router.push("/LoginCooperativa")}
         >
           Voltar ao login
         </button>

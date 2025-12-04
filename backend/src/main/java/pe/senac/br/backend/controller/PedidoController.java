@@ -1,6 +1,7 @@
 package pe.senac.br.backend.controller;
 
 import pe.senac.br.backend.dto.PedidoDTO;
+import pe.senac.br.backend.dto.StatusDTO;
 import pe.senac.br.backend.model.Cliente;
 import pe.senac.br.backend.model.Endereco;
 import pe.senac.br.backend.model.Pedido;
@@ -61,6 +62,8 @@ public class PedidoController {
                 .map(pedido -> ResponseEntity.ok(toDTO(pedido)))
                 .orElse(ResponseEntity.notFound().build());
     }
+    
+    
 
     @PostMapping
     public ResponseEntity<PedidoDTO> criar(@RequestBody PedidoDTO dto) {
@@ -68,6 +71,18 @@ public class PedidoController {
         Pedido salvo = pedidoRepository.save(pedido);
         return ResponseEntity.ok(toDTO(salvo));
     }
+    
+    @PutMapping("/{id}/status")
+    public ResponseEntity<?> atualizarStatus(@PathVariable Long id, @RequestBody StatusDTO statusDTO) {
+        return pedidoRepository.findById(id)
+                .map(pedido -> {
+                    pedido.setStatus(statusDTO.getStatus());
+                    pedidoRepository.save(pedido);
+                    return ResponseEntity.ok("Status atualizado para: " + statusDTO.getStatus());
+                })
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pedido não encontrado"));
+    }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<PedidoDTO> atualizar(@PathVariable Long id,
