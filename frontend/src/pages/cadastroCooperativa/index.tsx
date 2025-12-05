@@ -49,7 +49,7 @@ export default function CopCadastro() {
       if (data.id) {
         setSucesso("Cadastro realizado com sucesso! Redirecionando...");
         setTimeout(() => {
-          router.push("/cop/login");
+          router.push("/LoginCooperativa");
         }, 1500);
       } else {
         setError("Não foi possível cadastrar o usuário.");

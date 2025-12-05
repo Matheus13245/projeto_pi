@@ -9,35 +9,39 @@ export default function CopLogin() {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setError("");
 
-    try {
-      // Chamada ao backend para login do CopUsuario
-      const { data } = await axios.post(
-        "http://localhost:8080/api/copauth/login",
-        { username: emailCorporativo, senha },
-        { validateStatus: (status) => status < 500 }
+  try {
+    const { data } = await axios.post(
+      "http://localhost:8080/api/copauth/login",
+      { username: emailCorporativo, senha },
+      { validateStatus: (status) => status < 500 }
+    );
+
+    if (data.sucesso) {
+
+      // --- BUSCA DADOS COMPLETOS DO USUÁRIO ---
+      const usuarioResp = await axios.get(
+        `http://localhost:8080/api/copusuarios/by-email/${emailCorporativo}`
       );
 
-      if (data.sucesso) {
-        // Salva info básica do usuário cop
-        localStorage.setItem("copusuarioLogado", emailCorporativo);
+      // SALVA O OBJETO COMPLETO
+      localStorage.setItem(
+        "copusuarioLogado",
+        JSON.stringify(usuarioResp.data)
+      );
 
-        router.push(`/MainCooperativa?user=${encodeURIComponent(emailCorporativo)}`);
-      } else {
-        setError(data.mensagem || "Credenciais inválidas");
-      }
-    } catch (err) {
-      if (axios.isAxiosError(err)) {
-        const axiosErr = err as AxiosError<{ mensagem: string }>;
-        setError(axiosErr.response?.data?.mensagem || "Erro na conexão com o servidor");
-      } else {
-        setError("Erro inesperado");
-      }
+      router.push("/MainCooperativa");
+
+    } else {
+      setError(data.mensagem || "Credenciais inválidas");
     }
-  };
+  } catch (err) {
+    setError("Erro inesperado");
+  }
+};
 
   return (
     <div className={styles.container}>
@@ -75,3 +79,4 @@ export default function CopLogin() {
     </div>
   );
 }
+  

@@ -36,6 +36,13 @@ public class CopUsuarioController {
                 .map(this::toDTO)
                 .collect(Collectors.toList());
     }
+    
+    @GetMapping("/by-email/{email}")
+    public ResponseEntity<CopUsuarioDTO> buscarPorEmail(@PathVariable String email) {
+        return copUsuarioRepository.findByEmailCorporativo(email)
+                .map(usuario -> ResponseEntity.ok(toDTO(usuario)))
+                .orElse(ResponseEntity.notFound().build());
+    }
 
     // -------------------------
     // BUSCAR POR ID
